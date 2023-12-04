@@ -17,6 +17,7 @@ public class SnakeGameTest {
         snakeGame = new SnakeGame(800, 600);  // Substitua com os tamanhos reais do tabuleiro
     }
 
+
     @Test
     public void testMoveUp() {
         // Simula o pressionamento da tecla UP
@@ -26,7 +27,6 @@ public class SnakeGameTest {
         assertEquals(0, snakeGame.velocityX);
         assertEquals(-1, snakeGame.velocityY);
     }
-    
     @Test
     public void testMoveDown() {
         // Simula o pressionamento da tecla DOWN
@@ -57,8 +57,27 @@ public class SnakeGameTest {
         assertEquals(0, snakeGame.velocityY);
     }
 
+
+    @Test
+    public void testGameOverConditions() {
+        SnakeGame snakeGame = new SnakeGame(300, 300);
+    
+        // Crie uma situação que leva ao game over (colisão com a si mesma)
+        snakeGame.snakeBody.add(snakeGame.new Tile(5, 5));
+    
+        // Execute a lógica do jogo para verificar o game over
+        snakeGame.move();
+    
+        // Verifique se o jogo terminou
+        assertTrue(snakeGame.gameOver);
+    
+      
+    }
+    
+
     // Método auxiliar para criar um evento KeyEvent
     private KeyEvent createKeyEvent(int keyCode) {
         return new KeyEvent(snakeGame, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0, keyCode, KeyEvent.CHAR_UNDEFINED);
     }
 }
+
