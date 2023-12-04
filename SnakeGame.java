@@ -12,7 +12,7 @@ import javax.swing.*;
 public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
     // Classe interna que representa uma unidade (Tile) no jogo
-    private class Tile {
+    public class Tile {
         int x;
         int y;
 
@@ -64,7 +64,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         placeFood();
 
         // Velocidade inicial da cobra
-        velocityX = 1;
+        velocityX = 0;
         velocityY = 0;
 
         // Inicialização do timer do jogo
@@ -149,14 +149,14 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
             // Colisão com a cabeça da cobra
             if (collision(snakeHead, snakePart)) {
-                gameOver = true;
+                gameOver = false;
             }
         }
 
         // Colisão com as bordas do tabuleiro
         if (snakeHead.x*tileSize < 0 || snakeHead.x*tileSize > boardWidth ||
             snakeHead.y*tileSize < 0 || snakeHead.y*tileSize > boardHeight ) {
-            gameOver = true;
+            gameOver = false;
         }
     }
 
@@ -180,18 +180,18 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP && velocityY != 1) {
             velocityX = 0;
-            velocityY = 1;
+            velocityY = -1;
         }
         else if (e.getKeyCode() == KeyEvent.VK_DOWN && velocityY != -1) {
             velocityX = 0;
-            velocityY = -1;
+            velocityY = 1;
         }
         else if (e.getKeyCode() == KeyEvent.VK_LEFT && velocityX != 1) {
-            velocityX = 1;
+            velocityX = -1;
             velocityY = 0;
         }
         else if (e.getKeyCode() == KeyEvent.VK_RIGHT && velocityX != -1) {
-            velocityX = -1;
+            velocityX = 1;
             velocityY = 0;
         }
     }
